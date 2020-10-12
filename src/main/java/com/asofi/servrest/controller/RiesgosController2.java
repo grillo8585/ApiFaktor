@@ -22,7 +22,7 @@ import com.asofi.servrest.service.EmpresasService;
 
 @RestController
 @RequestMapping("/api/empresas")
-public class EmpresaController {
+public class RiesgosController2 {
 
 	@Autowired //Realizamos la inyección de dependencias  
 	private EmpresasService empresasServices;
@@ -45,6 +45,17 @@ public class EmpresaController {
 		}
 		return ResponseEntity.ok(oEmpresas);
 	}
+	// Leer una empresa
+		@GetMapping("/{id}/riesgoL")
+    public ResponseEntity<?> read_riesgo(@PathVariable(value = "id") Long Idempresa){
+			Optional<Empresas> oEmpresas = empresasServices.findByID(Idempresa);
+			//Validamos que haya encontrado la empresa
+			if(!oEmpresas.isPresent()) {
+				//Devolvemos que no ha encontrado la empresa
+				return ResponseEntity.notFound().build();
+			}
+			return ResponseEntity.ok(oEmpresas);
+		}
 	
 	//Actualizar una empresa
 	@PutMapping("/{id}")
