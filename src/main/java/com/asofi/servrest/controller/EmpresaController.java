@@ -1,6 +1,9 @@
 package com.asofi.servrest.controller;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -72,6 +75,17 @@ public class EmpresaController {
 		empresasServices.deteleById(Idempresa);
 		//Devolvemos rspuesta con código 200 = OK
 		return ResponseEntity.ok().build();
+	}
+	
+	//Leer Todas las empresas
+	@GetMapping
+	public List<Empresas> readAll(){
+		//Utilizamos Streamsupport Api Java 8
+		
+		List<Empresas> empresas = StreamSupport // Usamos streamsupport que hereda de Object 
+				.stream(empresasServices.findAll().spliterator(), false)
+				.collect(Collectors.toList());
+		return empresas;
 	}
  }
 
