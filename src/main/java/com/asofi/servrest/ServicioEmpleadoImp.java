@@ -10,7 +10,7 @@ import javax.ws.rs.core.Response;
 
 import org.springframework.stereotype.Service;
 
-import com.asofi.servrest.modelo.Empleado;
+import com.asofi.servrest.entity.Empleado;
 
 @Service
 public class ServicioEmpleadoImp implements ServicioEmpleado {

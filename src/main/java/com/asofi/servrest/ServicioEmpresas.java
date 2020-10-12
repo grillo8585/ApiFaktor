@@ -9,7 +9,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 
-import com.asofi.servrest.modelo.Empresas;
+import com.asofi.servrest.entity.Empresas;
 
 @Path("/servicio")
 public interface ServicioEmpresas {

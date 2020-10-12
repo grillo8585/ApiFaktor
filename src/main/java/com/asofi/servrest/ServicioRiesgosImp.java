@@ -10,7 +10,7 @@ import javax.ws.rs.core.Response;
 
 import org.springframework.stereotype.Service;
 
-import com.asofi.servrest.modelo.Riesgos;
+import com.asofi.servrest.entity.Riesgos;
 
 @Service
 public class ServicioRiesgosImp implements ServicioRiesgos {
