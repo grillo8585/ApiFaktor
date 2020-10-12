@@ -25,7 +25,7 @@ public class Riesgos implements Serializable{
 	@Column(length = 50)
 	private String nombre;
 	
-	private String prueba;
+	private Riesgos prueba;
 
 	public Long getId() {
 		return id;
