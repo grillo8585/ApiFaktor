@@ -1,4 +1,4 @@
-package com.asofi.servrest;
+package com.asofi.servrest.service;
 
 import java.util.ArrayList;
 import java.util.Collection;
