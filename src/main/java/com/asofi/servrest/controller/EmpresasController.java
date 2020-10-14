@@ -69,7 +69,7 @@ public class EmpresasController {
 		
 		//Actualizamos los campos
 		oEmpresas.get().setNombre(empresaDetails.getNombre());
-		oEmpresas.get().setNombre(empresaDetails.getNombre());
+		oEmpresas.get().setL_riesgos(empresaDetails.getL_riesgos());
 		return ResponseEntity.status(HttpStatus.CREATED).body(empresasServices.save(oEmpresas.get()));
 		
 	}

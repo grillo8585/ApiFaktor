@@ -36,7 +36,7 @@ public class Empresas implements Serializable {
 	@Column(length = 50)
 	private String nombre;
 	
-	@ManyToMany()
+	@ManyToMany(fetch = FetchType.LAZY)
 	
 	private List<Riesgos> l_riesgos;
 //
