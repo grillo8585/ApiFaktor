@@ -33,7 +33,7 @@ public class ProyectosController2 {
 	public ResponseEntity<?> create(@RequestBody Proyectos proyecto){
 		
 		return ResponseEntity.status(HttpStatus.CREATED).body(proyectosServices.save(proyecto));
-	}dsds
+	}ds
 	
 	// Leer una proyecto
 	@GetMapping("/{id}")
