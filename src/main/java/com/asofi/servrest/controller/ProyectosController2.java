@@ -33,7 +33,7 @@ public class ProyectosController2 {
 	public ResponseEntity<?> create(@RequestBody Proyectos proyecto){
 		
 		return ResponseEntity.status(HttpStatus.CREATED).body(proyectosServices.save(proyecto));
-	}
+	}dsds
 	
 	// Leer una proyecto
 	@GetMapping("/{id}")
@@ -47,7 +47,7 @@ public class ProyectosController2 {
 		return ResponseEntity.ok(oproyectos);
 	}
 	// Leer una proyecto
-		@GetMapping("/{id}/empresas")
+    @GetMapping("/{id}/empresas")
     public ResponseEntity<?> read_empresas(@PathVariable(value = "id") Long Idproyecto){
 			Optional<Proyectos> oproyectos = proyectosServices.findByID(Idproyecto);
 			//Validamos que haya encontrado la proyecto
