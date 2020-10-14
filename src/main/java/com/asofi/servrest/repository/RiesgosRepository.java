@@ -9,7 +9,5 @@ import com.asofi.servrest.entity.Riesgos;
 
 @Repository
 public interface RiesgosRepository extends JpaRepository<Riesgos, Long>{
-	
-	
 
 }

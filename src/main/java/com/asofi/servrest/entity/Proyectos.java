@@ -4,11 +4,18 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+//import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import org.hibernate.annotations.CascadeType;
 @Entity
 @Table(name="proyectos")
 @XmlRootElement(name="proyectos")
@@ -25,7 +32,10 @@ public class Proyectos implements Serializable{
 	@Column(length = 50)
 	private String nombre;
 
-	private Empresas empresa;
+	@OneToOne(optional = true,cascade = javax.persistence.CascadeType.ALL , 
+			  fetch = FetchType.EAGER,targetEntity = Empresas.class,orphanRemoval = true )
+	//@JoinColumn(name = "empresas_id")
+	private Empresas empresa_p;
 
 	public Long getId() {
 		return id;
@@ -36,11 +46,11 @@ public class Proyectos implements Serializable{
 	}
 
 	public Empresas getEmpresa() {
-		return empresa;
+		return empresa_p;
 	}
 
 	public void setEmpresa(Empresas empresa) {
-		this.empresa = empresa;
+		this.empresa_p = empresa;
 	}
 
 	public String getNombre() {

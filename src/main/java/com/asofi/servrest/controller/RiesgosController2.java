@@ -17,86 +17,86 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.asofi.servrest.entity.Empresas;
-import com.asofi.servrest.service.EmpresasService;
+import com.asofi.servrest.entity.Riesgos;
+import com.asofi.servrest.service.RiesgosService;
 
 @RestController
-@RequestMapping("/api/empresas")
+@RequestMapping("/api/riesgos")
 public class RiesgosController2 {
 
 	@Autowired //Realizamos la inyección de dependencias  
-	private EmpresasService empresasServices;
+	private RiesgosService riesgosServices;
 	
-	//Crear Empresa
+	//Crear riesgo
 	@PostMapping
-	public ResponseEntity<?> create(@RequestBody Empresas empresa){
+	public ResponseEntity<?> create(@RequestBody Riesgos riesgo){
 		
-		return ResponseEntity.status(HttpStatus.CREATED).body(empresasServices.save(empresa));
+		return ResponseEntity.status(HttpStatus.CREATED).body(riesgosServices.save(riesgo));
 	}
 	
-	// Leer una empresa
+	// Leer una riesgo
 	@GetMapping("/{id}")
-	public ResponseEntity<?> read(@PathVariable(value = "id") Long Idempresa){
-		Optional<Empresas> oEmpresas = empresasServices.findByID(Idempresa);
-		//Validamos que haya encontrado la empresa
-		if(!oEmpresas.isPresent()) {
-			//Devolvemos que no ha encontrado la empresa
+	public ResponseEntity<?> read(@PathVariable(value = "id") Long Idriesgo){
+		Optional<Riesgos> oRiesgos = riesgosServices.findByID(Idriesgo);
+		//Validamos que haya encontrado la riesgo
+		if(!oRiesgos.isPresent()) {
+			//Devolvemos que no ha encontrado la riesgo
 			return ResponseEntity.notFound().build();
 		}
-		return ResponseEntity.ok(oEmpresas);
+		return ResponseEntity.ok(oRiesgos);
 	}
-	// Leer una empresa
+	// Leer una riesgo
 		@GetMapping("/{id}/riesgoL")
-    public ResponseEntity<?> read_riesgo(@PathVariable(value = "id") Long Idempresa){
-			Optional<Empresas> oEmpresas = empresasServices.findByID(Idempresa);
-			//Validamos que haya encontrado la empresa
-			if(!oEmpresas.isPresent()) {
-				//Devolvemos que no ha encontrado la empresa
+    public ResponseEntity<?> read_riesgo(@PathVariable(value = "id") Long Idriesgo){
+			Optional<Riesgos> oRiesgos = riesgosServices.findByID(Idriesgo);
+			//Validamos que haya encontrado la riesgo
+			if(!oRiesgos.isPresent()) {
+				//Devolvemos que no ha encontrado la riesgo
 				return ResponseEntity.notFound().build();
 			}
-			return ResponseEntity.ok(oEmpresas);
+			return ResponseEntity.ok(oRiesgos);
 		}
 	
-	//Actualizar una empresa
+	//Actualizar una riesgo
 	@PutMapping("/{id}")
-	public ResponseEntity<?> update(@RequestBody Empresas empresaDetails,  @PathVariable(value = "id") Long Idempresa){
-		Optional<Empresas> oEmpresas = empresasServices.findByID(Idempresa);
-		//Validamos que haya encontrado la empresa
-		if(!oEmpresas.isPresent()) {
-			//Devolvemos que no ha encontrado la empresa
+	public ResponseEntity<?> update(@RequestBody Riesgos riesgoDetails,  @PathVariable(value = "id") Long Idriesgo){
+		Optional<Riesgos> oRiesgos = riesgosServices.findByID(Idriesgo);
+		//Validamos que haya encontrado la riesgo
+		if(!oRiesgos.isPresent()) {
+			//Devolvemos que no ha encontrado la riesgo
 			return ResponseEntity.notFound().build();
 		}
 		
 		//Actualizamos los campos
-		oEmpresas.get().setNombre(empresaDetails.getNombre());
-		oEmpresas.get().setNombre(empresaDetails.getNombre());
-		return ResponseEntity.status(HttpStatus.CREATED).body(empresasServices.save(oEmpresas.get()));
+		oRiesgos.get().setNombre(riesgoDetails.getNombre());
+		oRiesgos.get().setNombre(riesgoDetails.getNombre());
+		return ResponseEntity.status(HttpStatus.CREATED).body(riesgosServices.save(oRiesgos.get()));
 		
 	}
-	//Borrar una empresa
+	//Borrar una riesgo
 	@DeleteMapping("/{id}")
-	public ResponseEntity<?> delete(@PathVariable(value = "id") Long Idempresa){
-		Optional<Empresas> oEmpresas = empresasServices.findByID(Idempresa);
-		//Validamos que haya encontrado la empresa
-		if(!oEmpresas.isPresent()) {
-			//Devolvemos que no ha encontrado la empresa
+	public ResponseEntity<?> delete(@PathVariable(value = "id") Long Idriesgo){
+		Optional<Riesgos> oRiesgos = riesgosServices.findByID(Idriesgo);
+		//Validamos que haya encontrado la riesgo
+		if(!oRiesgos.isPresent()) {
+			//Devolvemos que no ha encontrado la riesgo
 			return ResponseEntity.notFound().build();
 		}
 		//Borramos el usuario
-		empresasServices.deteleById(Idempresa);
+		riesgosServices.deteleById(Idriesgo);
 		//Devolvemos rspuesta con código 200 = OK
 		return ResponseEntity.ok().build();
 	}
 	
-	//Leer Todas las empresas
+	//Leer Todas las Riesgos
 	@GetMapping
-	public List<Empresas> readAll(){
+	public List<Riesgos> readAll(){
 		//Utilizamos Streamsupport Api Java 8
 		
-		List<Empresas> empresas = StreamSupport // Usamos streamsupport que hereda de Object 
-				.stream(empresasServices.findAll().spliterator(), false)
+		List<Riesgos> Riesgos = StreamSupport // Usamos streamsupport que hereda de Object 
+				.stream(riesgosServices.findAll().spliterator(), false)
 				.collect(Collectors.toList());
-		return empresas;
+		return Riesgos;
 	}
  }
 

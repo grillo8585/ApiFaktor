@@ -1,5 +1,6 @@
 package com.asofi.servrest.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,13 +10,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.asofi.servrest.entity.Empresas;
+import com.asofi.servrest.entity.Riesgos;
 import com.asofi.servrest.repository.EmpresasRepository;
+import com.asofi.servrest.repository.RiesgosRepository;
 
 @Service
 public class EmpresasServiceimpl implements EmpresasService{
 
 	@Autowired 
 	private EmpresasRepository empresasrepository;
+	@Autowired 
+	private RiesgosRepository riesgosrepository;
 	@Override
 	@Transactional(readOnly = true) // Solo lectura , no cambia nada en la base de datos
 	public Iterable<Empresas> findAll() {
@@ -49,6 +54,25 @@ public class EmpresasServiceimpl implements EmpresasService{
 	public void deteleById(Long id) {
 		// TODO Auto-generated method stub
 		empresasrepository.deleteById(id);
+	}
+
+	@Override
+	@Transactional
+	public List<Riesgos> addRiesgos(Riesgos riesgo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Riesgos> getRiesgosById(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Riesgos> getRiesgos() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

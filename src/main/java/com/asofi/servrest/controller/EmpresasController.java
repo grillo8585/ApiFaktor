@@ -45,8 +45,8 @@ public class EmpresasController {
 		}
 		return ResponseEntity.ok(oEmpresas);
 	}
-	// Leer una empresa
-		@GetMapping("/{id}/riesgoL")
+	// Consultar Riesgo de líquidez
+    @GetMapping("/{id}/riesgoL")
     public ResponseEntity<?> read_riesgo(@PathVariable(value = "id") Long Idempresa){
 			Optional<Empresas> oEmpresas = empresasServices.findByID(Idempresa);
 			//Validamos que haya encontrado la empresa
