@@ -82,6 +82,7 @@ public class RiesgosController2 {
 			//Devolvemos que no ha encontrado la riesgo
 			return ResponseEntity.notFound().build();
 		}
+		oRiesgos.get().removeRiesgosFromEmpresas();
 		//Borramos el usuario
 		riesgosServices.deteleById(Idriesgo);
 		//Devolvemos rspuesta con código 200 = OK

@@ -3,6 +3,9 @@ package com.asofi.servrest.service;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,7 +19,8 @@ import com.asofi.servrest.repository.RiesgosRepository;
 
 @Service
 public class EmpresasServiceimpl implements EmpresasService{
-
+	@PersistenceContext
+	EntityManager em;
 	@Autowired 
 	private EmpresasRepository empresasrepository;
 	@Autowired 

@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 //import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -32,8 +31,8 @@ public class Proyectos implements Serializable{
 	@Column(length = 50)
 	private String nombre;
 
-	@OneToOne(optional = true,cascade = javax.persistence.CascadeType.ALL , 
-			  fetch = FetchType.EAGER,targetEntity = Empresas.class,orphanRemoval = true )
+	@OneToOne(optional = true,cascade = { javax.persistence.CascadeType.MERGE,javax.persistence.CascadeType.PERSIST,javax.persistence.CascadeType.REFRESH}, 
+			  fetch = FetchType.EAGER,targetEntity = Empresas.class,orphanRemoval = false )
 	//@JoinColumn(name = "empresas_id")
 	private Empresas empresa_p;
 

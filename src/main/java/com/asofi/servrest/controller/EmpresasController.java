@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.asofi.servrest.entity.Empresas;
+import com.asofi.servrest.entity.Proyectos;
 import com.asofi.servrest.service.EmpresasService;
+import com.asofi.servrest.service.ProyectosService;
 
 @RestController
 @RequestMapping("/api/empresas")
@@ -26,7 +28,8 @@ public class EmpresasController {
 
 	@Autowired //Realizamos la inyección de dependencias  
 	private EmpresasService empresasServices;
-	
+	@Autowired //Realizamos la inyección de dependencias  
+	private ProyectosService proyectosServices;
 	//Crear Empresa
 	@PostMapping
 	public ResponseEntity<?> create(@RequestBody Empresas empresa){
@@ -82,6 +85,10 @@ public class EmpresasController {
 			//Devolvemos que no ha encontrado la empresa
 			return ResponseEntity.notFound().build();
 		}
+		
+		Optional<Proyectos> oProyectos = proyectosServices.findByIDEmpresa(Idempresa);
+		oProyectos.get().setEmpresa(null);
+		proyectosServices.save(oProyectos.get());
 		//Borramos el usuario
 		empresasServices.deteleById(Idempresa);
 		//Devolvemos rspuesta con código 200 = OK

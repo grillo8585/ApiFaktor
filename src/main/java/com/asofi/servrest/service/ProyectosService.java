@@ -19,5 +19,7 @@ public interface ProyectosService {
 	public Proyectos save(Proyectos proyecto);
 	
 	public void deteleById(Long id);
+	
+	public Optional<Proyectos> findByIDEmpresa(Long id);
 
 }

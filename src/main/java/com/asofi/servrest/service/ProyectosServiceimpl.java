@@ -1,6 +1,12 @@
 package com.asofi.servrest.service;
 
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,7 +19,8 @@ import com.asofi.servrest.repository.ProyectosRepository;
 
 @Service
 public class ProyectosServiceimpl implements ProyectosService{
-
+	@PersistenceContext
+	EntityManager em;
 	@Autowired 
 	private ProyectosRepository Proyectosrepository;
 	@Override
@@ -49,6 +56,34 @@ public class ProyectosServiceimpl implements ProyectosService{
 	public void deteleById(Long id) {
 		// TODO Auto-generated method stub
 		Proyectosrepository.deleteById(id);
+	}
+
+	@Override
+	public Optional<Proyectos> findByIDEmpresa(Long id) {
+		// TODO Auto-generated method stub
+		//JPQL y HQL
+		String jpql = "SELECT p FROM Proyectos p WHERE p.empresa_p.id=:empresa_id";
+		Query query ;
+		try {
+			query = em.createQuery(jpql);	
+		} catch (Exception e) {
+		
+			try {
+				jpql = "SELECT p FROM Proyectos p WHERE p.empresa_p_id=:empresa_id";
+				query = em.createQuery(jpql);		
+			} catch (Exception e2) {
+				// TODO: handle exception
+				jpql = "SELECT p FROM Proyectos p WHERE p.empresa_p=:empresa_id";
+				query = em.createQuery(jpql);
+			}
+		}
+		query.setParameter("empresa_id", id);
+		
+		Proyectos proyecto = (Proyectos) query.getSingleResult();
+		
+
+		return Optional.of(proyecto); 
+		
 	}
 
 }
