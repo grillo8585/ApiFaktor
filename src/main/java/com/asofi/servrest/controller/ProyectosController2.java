@@ -17,8 +17,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.asofi.servrest.entity.Empresas;
 import com.asofi.servrest.entity.Proyectos;
-
+import com.asofi.servrest.service.EmpresasService;
 import com.asofi.servrest.service.ProyectosService;
 
 @RestController
@@ -27,6 +28,8 @@ public class ProyectosController2 {
 
 	@Autowired //Realizamos la inyección de dependencias  
 	private ProyectosService proyectosServices;
+	@Autowired //Realizamos la inyección de dependencias  
+	private EmpresasService empresasServices;
 	
 	//Crear proyecto
 	@PostMapping
@@ -46,12 +49,37 @@ public class ProyectosController2 {
 		}
 		return ResponseEntity.ok(oproyectos);
 	}
-	// Leer una proyecto
+	// Leer empresa de proyecto
     @GetMapping("/{id}/empresas")
     public ResponseEntity<?> read_empresas(@PathVariable(value = "id") Long Idproyecto){
 			Optional<Proyectos> oproyectos = proyectosServices.findByID(Idproyecto);
 			//Validamos que haya encontrado la proyecto
 			if(!oproyectos.isPresent()) {
+				//Devolvemos que no ha encontrado la proyecto
+				return ResponseEntity.notFound().build();
+			}
+			
+			return ResponseEntity.ok(oproyectos.get().getEmpresa());
+		}
+	
+
+	// Leer empresa de proyecto
+    @GetMapping("/{id}/empresas/{ide}")
+    public ResponseEntity<?> read_empresas(@PathVariable(value = "id") Long Idproyecto,@PathVariable(value = "ide") Long Idempresa){
+			Optional<Proyectos> oproyectos = proyectosServices.findByID(Idproyecto);
+			//Validamos que haya encontrado la proyecto
+			if(!oproyectos.isPresent()) {
+				//Devolvemos que no ha encontrado la proyecto
+				return ResponseEntity.notFound().build();
+			}
+			Optional<Empresas> oempresas = empresasServices.findByID(Idempresa);
+			//Validamos que haya encontrado la proyecto
+			if(!oempresas.isPresent()) {
+				//Devolvemos que no ha encontrado la proyecto
+				return ResponseEntity.notFound().build();
+			}
+			//Validamos que la empresa encontrada sea la misma del proyecto
+			if(!(oproyectos.get().getEmpresa().getId() == Idempresa) ) {
 				//Devolvemos que no ha encontrado la proyecto
 				return ResponseEntity.notFound().build();
 			}
