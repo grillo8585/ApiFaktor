@@ -8,7 +8,5 @@ import com.asofi.servrest.entity.Empresas;
 
 @Repository
 public interface EmpresasRepository extends JpaRepository<Empresas, Long>{
-	
-	
-
+ 
 }

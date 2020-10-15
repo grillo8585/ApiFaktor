@@ -72,6 +72,7 @@ public class EmpresasController {
 		
 		//Actualizamos los campos
 		oEmpresas.get().setNombre(empresaDetails.getNombre());
+		
 		oEmpresas.get().setL_riesgos(empresaDetails.getL_riesgos());
 		return ResponseEntity.status(HttpStatus.CREATED).body(empresasServices.save(oEmpresas.get()));
 		
@@ -87,6 +88,12 @@ public class EmpresasController {
 		}
 		
 		Optional<Proyectos> oProyectos = proyectosServices.findByIDEmpresa(Idempresa);
+		//Validamos que haya encontrado el proyecto
+				if(!oProyectos.isPresent()) {
+					//Devolvemos que no ha encontrado la empresa
+					return ResponseEntity.notFound().build();
+				}
+				
 		oProyectos.get().setEmpresa(null);
 		proyectosServices.save(oProyectos.get());
 		//Borramos el usuario

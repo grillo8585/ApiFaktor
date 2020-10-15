@@ -85,7 +85,20 @@ public class ProyectosController2 {
 			}
 			return ResponseEntity.ok(oproyectos.get().getEmpresa());
 		}
-	
+
+	// Leer empresa de proyecto
+    @GetMapping("/empresas/{ide}")
+    public ResponseEntity<?> read_empresas_p(@PathVariable(value = "ide") Long Idempresa){
+    	Optional<Proyectos> oProyectos = proyectosServices.findByIDEmpresa(Idempresa);
+		//Validamos que haya encontrado el proyecto
+		if(!oProyectos.isPresent()) {
+			//Devolvemos que no ha encontrado la empresa
+			return ResponseEntity.notFound().build();
+			}
+		   return ResponseEntity.ok().body(oProyectos);
+		}
+   
+    
 	//Actualizar una proyecto
 	@PutMapping("/{id}")
 	public ResponseEntity<?> update(@RequestBody Proyectos proyectoDetails,  @PathVariable(value = "id") Long Idproyecto){

@@ -60,23 +60,10 @@ public class ProyectosServiceimpl implements ProyectosService{
 
 	@Override
 	public Optional<Proyectos> findByIDEmpresa(Long id) {
-		// TODO Auto-generated method stub
 		//JPQL y HQL
 		String jpql = "SELECT p FROM Proyectos p WHERE p.empresa_p.id=:empresa_id";
 		Query query ;
-		try {
-			query = em.createQuery(jpql);	
-		} catch (Exception e) {
-		
-			try {
-				jpql = "SELECT p FROM Proyectos p WHERE p.empresa_p_id=:empresa_id";
-				query = em.createQuery(jpql);		
-			} catch (Exception e2) {
-				// TODO: handle exception
-				jpql = "SELECT p FROM Proyectos p WHERE p.empresa_p=:empresa_id";
-				query = em.createQuery(jpql);
-			}
-		}
+		query = em.createQuery(jpql);	
 		query.setParameter("empresa_id", id);
 		
 		Proyectos proyecto = (Proyectos) query.getSingleResult();

@@ -69,7 +69,6 @@ public class RiesgosController2 {
 		
 		//Actualizamos los campos
 		oRiesgos.get().setNombre(riesgoDetails.getNombre());
-		oRiesgos.get().setNombre(riesgoDetails.getNombre());
 		return ResponseEntity.status(HttpStatus.CREATED).body(riesgosServices.save(oRiesgos.get()));
 		
 	}
