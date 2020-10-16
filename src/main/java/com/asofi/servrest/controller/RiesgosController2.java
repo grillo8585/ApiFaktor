@@ -69,6 +69,13 @@ public class RiesgosController2 {
 		
 		//Actualizamos los campos
 		oRiesgos.get().setNombre(riesgoDetails.getNombre());
+        oRiesgos.get().setConsecutivoRiesgo(riesgoDetails.getConsecutivoRiesgo());
+		oRiesgos.get().setProcesoAsociado(riesgoDetails.getProcesoAsociado());
+		oRiesgos.get().setDescripcionRiesgo(riesgoDetails.getDescripcionRiesgo());
+		oRiesgos.get().setRiesgosAsociados(riesgoDetails.getRiesgosAsociados());
+		oRiesgos.get().setCausasRiesgo(riesgoDetails.getCausasRiesgo());
+		oRiesgos.get().setFactorRiesgo(riesgoDetails.getFactorRiesgo());
+		
 		return ResponseEntity.status(HttpStatus.CREATED).body(riesgosServices.save(oRiesgos.get()));
 		
 	}
