@@ -28,6 +28,8 @@ public class Proyectos implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	private String descripcion;
+	
 	@Column(length = 50)
 	private String nombre;
 
@@ -59,5 +61,14 @@ public class Proyectos implements Serializable{
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+	
 
 }
