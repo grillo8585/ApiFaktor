@@ -32,6 +32,14 @@ public class Empresas implements Serializable {
 	@Column(length = 50)
 	private String nombre;
 	
+	private String nit;
+	
+	private String descripcion;
+	
+	private String direccion;
+	
+	private String telefono;
+	
 	
 	@JoinTable(
 		        name = "empresas_l_riesgos",
@@ -65,5 +73,42 @@ public class Empresas implements Serializable {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+	
+	//Getters and setter del nit
+	public String getNit() {
+		return nit;
+	}
+	
+	public void setNit(String nit) {
+		this.nit = nit;
+	}
+	
+	//Getters and setter de la descripcion
+	public String getDescripcion() {
+		return descripcion;
+	}
+		
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+	
+	//Getters and setter de la direccion
+	public String getDireccion() {
+		return direccion;
+	}
+			
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+	
+	//Getters and setter del telefono
+	public String getTelefono() {
+		return telefono;
+	}
+				
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+	
 
 }
