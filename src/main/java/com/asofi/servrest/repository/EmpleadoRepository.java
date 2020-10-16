@@ -8,6 +8,4 @@ import com.asofi.servrest.entity.Empleado;
 @Repository
 public interface EmpleadoRepository extends JpaRepository<Empleado, Long>{
 	
-	
-
 }

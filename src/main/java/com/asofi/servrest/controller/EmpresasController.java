@@ -32,9 +32,11 @@ public class EmpresasController {
 	private ProyectosService proyectosServices;
 	//Crear Empresa
 	@PostMapping
-	public ResponseEntity<?> create(@RequestBody Empresas empresa){
+	public ResponseEntity<?> create(@RequestBody List<Empresas> empresa){
 		
-		return ResponseEntity.status(HttpStatus.CREATED).body(empresasServices.save(empresa));
+		
+//		return ResponseEntity.status(HttpStatus.CREATED).body(empresasServices.save(empresa)));
+		return ResponseEntity.status(HttpStatus.CREATED).body(empresasServices.save(empresa).toArray());
 	}
 	
 	// Leer una empresa
@@ -48,18 +50,7 @@ public class EmpresasController {
 		}
 		return ResponseEntity.ok(oEmpresas);
 	}
-	// Consultar Riesgo de líquidez
-    @GetMapping("/{id}/riesgoL")
-    public ResponseEntity<?> read_riesgo(@PathVariable(value = "id") Long Idempresa){
-			Optional<Empresas> oEmpresas = empresasServices.findByID(Idempresa);
-			//Validamos que haya encontrado la empresa
-			if(!oEmpresas.isPresent()) {
-				//Devolvemos que no ha encontrado la empresa
-				return ResponseEntity.notFound().build();
-			}
-			return ResponseEntity.ok(oEmpresas);
-		}
-	
+	// 
 	//Actualizar una empresa
 	@PutMapping("/{id}")
 	public ResponseEntity<?> update(@RequestBody Empresas empresaDetails,  @PathVariable(value = "id") Long Idempresa){

@@ -24,6 +24,8 @@ public interface EmpresasService {
 	public List<Riesgos> getRiesgos();
 	public Empresas save(Empresas empresa);
 	
+	public List<Empresas> save(List<Empresas> empresas);
+	
 	public void deteleById(Long id);
 
 }

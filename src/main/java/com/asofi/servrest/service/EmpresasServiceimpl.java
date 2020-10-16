@@ -79,4 +79,10 @@ public class EmpresasServiceimpl implements EmpresasService{
 		return null;
 	}
 
+	@Override
+	public List<Empresas> save(List<Empresas> empresas) {
+		// TODO Auto-generated method stub
+		return empresasrepository.saveAll(empresas);
+	}
+
 }
