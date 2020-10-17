@@ -29,6 +29,13 @@ public class Riesgos implements Serializable{
 	@Column(length = 50)
 	private String nombre;
 	
+	private String consecutivoRiesgo;
+	private String procesoAsociado;
+	private String descripcionRiesgo;
+	private String riesgosAsociados;
+	private String causasRiesgo;
+	private String factorRiesgo;
+	
     //@ManyToOne
     //@JoinColumn(name = "empresas_id")
 	@ManyToMany(mappedBy = "l_riesgos")
@@ -56,4 +63,52 @@ public class Riesgos implements Serializable{
 		this.nombre = nombre;
 	}
 
+	
+	public String getConsecutivoRiesgo() {
+		return consecutivoRiesgo;
+	}
+
+	public void setConsecutivoRiesgo(String consecutivoRiesgo) {
+		this.consecutivoRiesgo = consecutivoRiesgo;
+	}
+	
+	public String getProcesoAsociado() {
+		return procesoAsociado;
+	}
+
+	public void setProcesoAsociado(String procesoAsociado) {
+		this.procesoAsociado = procesoAsociado;
+	}
+	
+	public String getDescripcionRiesgo() {
+		return descripcionRiesgo;
+	}
+
+	public void setDescripcionRiesgo(String descripcionRiesgo) {
+		this.descripcionRiesgo = descripcionRiesgo;
+	}
+	
+	public String getRiesgosAsociados() {
+		return riesgosAsociados;
+	}
+
+	public void setRiesgosAsociados(String riesgosAsociados) {
+		this.riesgosAsociados = riesgosAsociados;
+	}
+	
+	public String getCausasRiesgo() {
+		return causasRiesgo;
+	}
+
+	public void setCausasRiesgo(String causasRiesgo) {
+		this.causasRiesgo = causasRiesgo;
+	}
+	
+	public String getFactorRiesgo() {
+		return factorRiesgo;
+	}
+
+	public void setFactorRiesgo(String factorRiesgo) {
+		this.factorRiesgo = factorRiesgo;
+	}
 }

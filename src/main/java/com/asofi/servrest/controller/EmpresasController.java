@@ -65,6 +65,12 @@ public class EmpresasController {
 		oEmpresas.get().setNombre(empresaDetails.getNombre());
 		
 		oEmpresas.get().setL_riesgos(empresaDetails.getL_riesgos());
+		
+		oEmpresas.get().setNit(empresaDetails.getNit());
+		oEmpresas.get().setDescripcion(empresaDetails.getDescripcion());
+		oEmpresas.get().setDireccion(empresaDetails.getDireccion());
+		oEmpresas.get().setTelefono(empresaDetails.getTelefono());
+		
 		return ResponseEntity.status(HttpStatus.CREATED).body(empresasServices.save(oEmpresas.get()));
 		
 	}
