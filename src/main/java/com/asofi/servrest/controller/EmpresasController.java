@@ -86,11 +86,11 @@ public class EmpresasController {
 		
 		Optional<Proyectos> oProyectos = proyectosServices.findByIDEmpresa(Idempresa);
 		//Validamos que haya encontrado el proyecto
-				if(!oProyectos.isPresent()) {
+		if(oProyectos.isPresent()) {
 					
 					oProyectos.get().setEmpresa(null);
 					proyectosServices.save(oProyectos.get());
-				}
+		}
 		//Borramos el usuario
 		empresasServices.deteleById(Idempresa);
 		//Devolvemos rspuesta con código 200 = OK
