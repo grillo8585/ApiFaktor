@@ -31,13 +31,13 @@ public class Empresas implements Serializable {
 	
 	@Column(length = 50)
 	private String nombre;
-	
+	@Column(length = 50)
 	private String nit;
-	
+	@Column(length = 50)
 	private String descripcion;
-	
+	@Column(length = 50)
 	private String direccion;
-	
+	@Column(length = 50)
 	private String telefono;
 	
 	

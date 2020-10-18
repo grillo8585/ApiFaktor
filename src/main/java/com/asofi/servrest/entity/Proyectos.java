@@ -30,6 +30,7 @@ public class Proyectos implements Serializable{
 	@Column(length = 100)
 	private String descripcion;
 	
+	
 	@Column(length = 50)
 	private String nombre;
 

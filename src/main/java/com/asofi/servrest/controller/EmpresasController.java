@@ -87,12 +87,10 @@ public class EmpresasController {
 		Optional<Proyectos> oProyectos = proyectosServices.findByIDEmpresa(Idempresa);
 		//Validamos que haya encontrado el proyecto
 				if(!oProyectos.isPresent()) {
-					//Devolvemos que no ha encontrado la empresa
-					return ResponseEntity.notFound().build();
+					
+					oProyectos.get().setEmpresa(null);
+					proyectosServices.save(oProyectos.get());
 				}
-				
-		oProyectos.get().setEmpresa(null);
-		proyectosServices.save(oProyectos.get());
 		//Borramos el usuario
 		empresasServices.deteleById(Idempresa);
 		//Devolvemos rspuesta con código 200 = OK

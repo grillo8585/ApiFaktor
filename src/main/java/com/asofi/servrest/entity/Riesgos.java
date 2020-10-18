@@ -28,12 +28,17 @@ public class Riesgos implements Serializable{
 	
 	@Column(length = 50)
 	private String nombre;
-	
+	@Column(length = 50)
 	private String consecutivoRiesgo;
+	@Column(length = 50)
 	private String procesoAsociado;
+	@Column(length = 50)
 	private String descripcionRiesgo;
+	@Column(length = 50)
 	private String riesgosAsociados;
+	@Column(length = 50)
 	private String causasRiesgo;
+	@Column(length = 50)
 	private String factorRiesgo;
 	
     //@ManyToOne
