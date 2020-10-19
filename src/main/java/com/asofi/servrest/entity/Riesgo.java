@@ -16,7 +16,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name="riesgos")
 @XmlRootElement(name="riesgos")
-public class Riesgos implements Serializable{
+public class Riesgo implements Serializable{
 	/**
 	 * 
 	 */
@@ -44,11 +44,11 @@ public class Riesgos implements Serializable{
     //@ManyToOne
     //@JoinColumn(name = "empresas_id")
 	@ManyToMany(mappedBy = "l_riesgos")
-    private List<Empresas> l_empresa;
+    private List<Empresa> l_empresa;
 	
 	@PreRemove
 	public void removeRiesgosFromEmpresas() {
-	    for (Empresas emp : l_empresa) {
+	    for (Empresa emp : l_empresa) {
 	    	emp.getL_riesgos().remove(this);
 	    }
 	}

@@ -10,11 +10,11 @@ import javax.ws.rs.core.Response;
 
 import org.springframework.stereotype.Service;
 
-import com.asofi.servrest.entity.Riesgos;
+import com.asofi.servrest.entity.Riesgo;
 
 @Service
 public class ServicioRiesgosImp implements ServicioRiesgos {
-	Map<Long, Riesgos > riesgos = new HashMap<>();
+	Map<Long, Riesgo > riesgos = new HashMap<>();
 	long idActual = 123;
 
 	public ServicioRiesgosImp() {
@@ -23,7 +23,7 @@ public class ServicioRiesgosImp implements ServicioRiesgos {
 
 	private void init() {
 		// TODO Auto-generated method stub
-		Riesgos riesgo = new Riesgos();
+		Riesgo riesgo = new Riesgo();
 		riesgo.setId(idActual);
 		riesgo.setNombre("Pacho");
 		riesgos.put(riesgo.getId(), riesgo);
@@ -31,21 +31,21 @@ public class ServicioRiesgosImp implements ServicioRiesgos {
 	}
 
 	@Override
-	public List<Riesgos> obtenerRiesgos() {
+	public List<Riesgo> obtenerRiesgos() {
 		// TODO Auto-generated method stub
-		Collection<Riesgos> resultado = riesgos.values();
-		List<Riesgos> respuesta = new ArrayList<>(resultado);
+		Collection<Riesgo> resultado = riesgos.values();
+		List<Riesgo> respuesta = new ArrayList<>(resultado);
 		return respuesta;
 	}
 
 	@Override
-	public Riesgos obtenerRiesgo(Long id) {
+	public Riesgo obtenerRiesgo(Long id) {
 		// TODO Auto-generated method stub
 		return riesgos.get(id);
 	}
 
 	@Override
-	public Response crearRiesgo(Riesgos riesgo) {
+	public Response crearRiesgo(Riesgo riesgo) {
 		// TODO Auto-generated method stub
 		riesgo.setId(++idActual);
 		
@@ -55,9 +55,9 @@ public class ServicioRiesgosImp implements ServicioRiesgos {
 	}
 
 	@Override
-	public Response actualizarRiesgo(Riesgos riesgo) {
+	public Response actualizarRiesgo(Riesgo riesgo) {
 		// TODO Auto-generated method stub
-		Riesgos riesgoActual = riesgos.get(riesgo.getId());
+		Riesgo riesgoActual = riesgos.get(riesgo.getId());
 		Response respuesta;
 		if (riesgoActual != null) {
 			riesgos.put(riesgoActual.getId(), riesgo);

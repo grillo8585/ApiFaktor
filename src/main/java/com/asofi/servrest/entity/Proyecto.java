@@ -18,7 +18,7 @@ import org.hibernate.annotations.CascadeType;
 @Entity
 @Table(name="proyectos")
 @XmlRootElement(name="proyectos")
-public class Proyectos implements Serializable{
+public class Proyecto implements Serializable{
 	/**
 	 * 
 	 */
@@ -35,9 +35,9 @@ public class Proyectos implements Serializable{
 	private String nombre;
 
 	@OneToOne(optional = true,cascade = { javax.persistence.CascadeType.MERGE,javax.persistence.CascadeType.PERSIST,javax.persistence.CascadeType.REFRESH}, 
-			  fetch = FetchType.EAGER,targetEntity = Empresas.class,orphanRemoval = false )
+			  fetch = FetchType.EAGER,targetEntity = Empresa.class,orphanRemoval = false )
 	//@JoinColumn(name = "empresas_id")
-	private Empresas empresa_p;
+	private Empresa empresa_p;
 
 	public Long getId() {
 		return id;
@@ -47,11 +47,11 @@ public class Proyectos implements Serializable{
 		this.id = id;
 	}
 
-	public Empresas getEmpresa() {
+	public Empresa getEmpresa() {
 		return empresa_p;
 	}
 
-	public void setEmpresa(Empresas empresa) {
+	public void setEmpresa(Empresa empresa) {
 		this.empresa_p = empresa;
 	}
 

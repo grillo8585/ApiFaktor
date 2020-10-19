@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,25 +16,35 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.asofi.servrest.entity.Empresas;
-import com.asofi.servrest.entity.Proyectos;
-import com.asofi.servrest.service.EmpresasService;
-import com.asofi.servrest.service.ProyectosService;
+import com.asofi.servrest.entity.Empresa;
+import com.asofi.servrest.entity.Proyecto;
+import com.asofi.servrest.service.EmpresaService;
+import com.asofi.servrest.service.ProyectoService;
+import net.kaczmarzyk.spring.data.jpa.web.annotation.And;
+import net.kaczmarzyk.spring.data.jpa.domain.Between;
+import net.kaczmarzyk.spring.data.jpa.domain.Equal;
+import net.kaczmarzyk.spring.data.jpa.domain.In;
+import net.kaczmarzyk.spring.data.jpa.domain.Like;
+import net.kaczmarzyk.spring.data.jpa.web.annotation.Spec;
+import utils.PagingHeaders;
+import utils.PagingResponse;
 
+import org.springframework.data.domain.Sort;
 @RestController
 @RequestMapping("/api/empresas")
 public class EmpresasController {
 
 	@Autowired //Realizamos la inyección de dependencias  
-	private EmpresasService empresasServices;
+	private EmpresaService empresasServices;
 	@Autowired //Realizamos la inyección de dependencias  
-	private ProyectosService proyectosServices;
+	private ProyectoService proyectosServices;
 	//Crear Empresa
 	@PostMapping
-	public ResponseEntity<?> create(@RequestBody List<Empresas> empresa){
+	public ResponseEntity<?> create(@RequestBody List<Empresa> empresa){
 		
 		
 //		return ResponseEntity.status(HttpStatus.CREATED).body(empresasServices.save(empresa)));
@@ -42,7 +54,7 @@ public class EmpresasController {
 	// Leer una empresa
 	@GetMapping("/{id}")
 	public ResponseEntity<?> read(@PathVariable(value = "id") Long Idempresa){
-		Optional<Empresas> oEmpresas = empresasServices.findByID(Idempresa);
+		Optional<Empresa> oEmpresas = empresasServices.findByID(Idempresa);
 		//Validamos que haya encontrado la empresa
 		if(!oEmpresas.isPresent()) {
 			//Devolvemos que no ha encontrado la empresa
@@ -53,8 +65,8 @@ public class EmpresasController {
 	// 
 	//Actualizar una empresa
 	@PutMapping("/{id}")
-	public ResponseEntity<?> update(@RequestBody Empresas empresaDetails,  @PathVariable(value = "id") Long Idempresa){
-		Optional<Empresas> oEmpresas = empresasServices.findByID(Idempresa);
+	public ResponseEntity<?> update(@RequestBody Empresa empresaDetails,  @PathVariable(value = "id") Long Idempresa){
+		Optional<Empresa> oEmpresas = empresasServices.findByID(Idempresa);
 		//Validamos que haya encontrado la empresa
 		if(!oEmpresas.isPresent()) {
 			//Devolvemos que no ha encontrado la empresa
@@ -77,14 +89,14 @@ public class EmpresasController {
 	//Borrar una empresa
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> delete(@PathVariable(value = "id") Long Idempresa){
-		Optional<Empresas> oEmpresas = empresasServices.findByID(Idempresa);
+		Optional<Empresa> oEmpresas = empresasServices.findByID(Idempresa);
 		//Validamos que haya encontrado la empresa
 		if(!oEmpresas.isPresent()) {
 			//Devolvemos que no ha encontrado la empresa
 			return ResponseEntity.notFound().build();
 		}
 		
-		Optional<Proyectos> oProyectos = proyectosServices.findByIDEmpresa(Idempresa);
+		Optional<Proyecto> oProyectos = proyectosServices.findByIDEmpresa(Idempresa);
 		//Validamos que haya encontrado el proyecto
 		if(oProyectos.isPresent()) {
 					
@@ -99,13 +111,40 @@ public class EmpresasController {
 	
 	//Leer Todas las empresas
 	@GetMapping
-	public List<Empresas> readAll(){
+	public ResponseEntity<List<Empresa>> readAll(	
+        @And({
+                @Spec(path = "id", params = "id", spec = Equal.class),
+                @Spec(path = "nombre", params = "nombre", spec = Like.class),
+                @Spec(path = "nit", params = "nit", spec = Like.class),
+                @Spec(path = "descripcion", params = "descripcion", spec = Like.class),
+                @Spec(path = "direccion", params = "direccion", spec = Like.class),
+                //@Spec(path = "telefono", params = {"createDateGt", "createDateLt"}, spec = Between.class)
+                @Spec(path = "telefono", params = "telefono", spec = Equal.class)
+        }) Specification<Empresa> spec,
+        Sort sort,
+        @RequestHeader HttpHeaders headers) {
+    final PagingResponse response = empresasServices.get(spec, headers, sort);
+    return new ResponseEntity<>(response.getElements(), returnHttpHeaders(response), HttpStatus.OK);
+}
+
+    public HttpHeaders returnHttpHeaders(PagingResponse response) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.set(PagingHeaders.COUNT.getName(), String.valueOf(response.getCount()));
+        headers.set(PagingHeaders.PAGE_SIZE.getName(), String.valueOf(response.getPageSize()));
+        headers.set(PagingHeaders.PAGE_OFFSET.getName(), String.valueOf(response.getPageOffset()));
+        headers.set(PagingHeaders.PAGE_NUMBER.getName(), String.valueOf(response.getPageNumber()));
+        headers.set(PagingHeaders.PAGE_TOTAL.getName(), String.valueOf(response.getPageTotal()));
+        return headers;
+    }
+	
+	/*
+	public List<Empresa> readAll(){
 		//Utilizamos Streamsupport Api Java 8
 		
-		List<Empresas> empresas = StreamSupport // Usamos streamsupport que hereda de Object 
+		List<Empresa> empresas = StreamSupport // Usamos streamsupport que hereda de Object 
 				.stream(empresasServices.findAll().spliterator(), false)
 				.collect(Collectors.toList());
 		return empresas;
-	}
+	}*/
  }
 

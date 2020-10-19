@@ -34,25 +34,25 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.asofi.servrest.entity.Empresas;
-import com.asofi.servrest.entity.Proyectos;
+import com.asofi.servrest.entity.Empresa;
+import com.asofi.servrest.entity.Proyecto;
 import com.asofi.servrest.entity.Reporte;
-import com.asofi.servrest.entity.Riesgos;
-import com.asofi.servrest.service.EmpresasService;
-import com.asofi.servrest.service.ProyectosService;
+import com.asofi.servrest.entity.Riesgo;
+import com.asofi.servrest.service.EmpresaService;
+import com.asofi.servrest.service.ProyectoService;
 
 @RestController
 @RequestMapping("/api/proyectos")
 public class ProyectosController2 {
 
 	@Autowired //Realizamos la inyección de dependencias  
-	private ProyectosService proyectosServices;
+	private ProyectoService proyectosServices;
 	@Autowired //Realizamos la inyección de dependencias  
-	private EmpresasService empresasServices;
+	private EmpresaService empresasServices;
 	
 	//Crear proyecto
 	@PostMapping
-	public ResponseEntity<?> create(@RequestBody Proyectos proyecto){
+	public ResponseEntity<?> create(@RequestBody Proyecto proyecto){
 		
 		return ResponseEntity.status(HttpStatus.CREATED).body(proyectosServices.save(proyecto));
 	}
@@ -60,7 +60,7 @@ public class ProyectosController2 {
 	// Leer una proyecto
 	@GetMapping("/{id}")
 	public ResponseEntity<?> read(@PathVariable(value = "id") Long Idproyecto){
-		Optional<Proyectos> oproyectos = proyectosServices.findByID(Idproyecto);
+		Optional<Proyecto> oproyectos = proyectosServices.findByID(Idproyecto);
 		//Validamos que haya encontrado la proyecto
 		if(!oproyectos.isPresent()) {
 			//Devolvemos que no ha encontrado la proyecto
@@ -71,7 +71,7 @@ public class ProyectosController2 {
 	// Leer empresa de proyecto
     @GetMapping("/{id}/empresas")
     public ResponseEntity<?> read_empresas(@PathVariable(value = "id") Long Idproyecto){
-			Optional<Proyectos> oproyectos = proyectosServices.findByID(Idproyecto);
+			Optional<Proyecto> oproyectos = proyectosServices.findByID(Idproyecto);
 			//Validamos que haya encontrado la proyecto
 			if(!oproyectos.isPresent()) {
 				//Devolvemos que no ha encontrado la proyecto
@@ -85,13 +85,13 @@ public class ProyectosController2 {
 	// Leer empresa de proyecto
     @GetMapping("/{id}/empresas/{ide}")
     public ResponseEntity<?> read_empresas(@PathVariable(value = "id") Long Idproyecto,@PathVariable(value = "ide") Long Idempresa){
-			Optional<Proyectos> oproyectos = proyectosServices.findByID(Idproyecto);
+			Optional<Proyecto> oproyectos = proyectosServices.findByID(Idproyecto);
 			//Validamos que haya encontrado la proyecto
 			if(!oproyectos.isPresent()) {
 				//Devolvemos que no ha encontrado la proyecto
 				return ResponseEntity.notFound().build();
 			}
-			Optional<Empresas> oempresas = empresasServices.findByID(Idempresa);
+			Optional<Empresa> oempresas = empresasServices.findByID(Idempresa);
 			//Validamos que haya encontrado la proyecto
 			if(!oempresas.isPresent()) {
 				//Devolvemos que no ha encontrado la proyecto
@@ -108,7 +108,7 @@ public class ProyectosController2 {
 	// Leer empresa de proyecto
     @GetMapping("/empresas/{ide}")
     public ResponseEntity<?> read_empresas_p(@PathVariable(value = "ide") Long Idempresa){
-    	Optional<Proyectos> oProyectos = proyectosServices.findByIDEmpresa(Idempresa);
+    	Optional<Proyecto> oProyectos = proyectosServices.findByIDEmpresa(Idempresa);
 		//Validamos que haya encontrado el proyecto
 		if(!oProyectos.isPresent()) {
 			//Devolvemos que no ha encontrado la empresa
@@ -120,8 +120,8 @@ public class ProyectosController2 {
     
 	//Actualizar una proyecto
 	@PutMapping("/{id}")
-	public ResponseEntity<?> update(@RequestBody Proyectos proyectoDetails,  @PathVariable(value = "id") Long Idproyecto){
-		Optional<Proyectos> oproyectos = proyectosServices.findByID(Idproyecto);
+	public ResponseEntity<?> update(@RequestBody Proyecto proyectoDetails,  @PathVariable(value = "id") Long Idproyecto){
+		Optional<Proyecto> oproyectos = proyectosServices.findByID(Idproyecto);
 		//Validamos que haya encontrado la proyecto
 		if(!oproyectos.isPresent()) {
 			//Devolvemos que no ha encontrado la proyecto
@@ -138,7 +138,7 @@ public class ProyectosController2 {
 	//Borrar una proyecto
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> delete(@PathVariable(value = "id") Long Idproyecto){
-		Optional<Proyectos> oproyectos = proyectosServices.findByID(Idproyecto);
+		Optional<Proyecto> oproyectos = proyectosServices.findByID(Idproyecto);
 		//Validamos que haya encontrado la proyecto
 		if(!oproyectos.isPresent()) {
 			//Devolvemos que no ha encontrado la proyecto
@@ -152,10 +152,10 @@ public class ProyectosController2 {
 	
 	//Leer Todas las proyectos
 	@GetMapping
-	public List<Proyectos> readAll(){
+	public List<Proyecto> readAll(){
 		//Utilizamos Streamsupport Api Java 8
 		
-		List<Proyectos> proyectos = StreamSupport // Usamos streamsupport que hereda de Object 
+		List<Proyecto> proyectos = StreamSupport // Usamos streamsupport que hereda de Object 
 				.stream(proyectosServices.findAll().spliterator(), false)
 				.collect(Collectors.toList());
 		return proyectos;
@@ -165,13 +165,13 @@ public class ProyectosController2 {
 	//Consultar Riesgo de líquidez
     @GetMapping("/empresas/{ide}/liquidez")
     public ResponseEntity<?> read_riesgo(@PathVariable(value = "ide") Long Idempresa){
-    	Optional<Proyectos> oProyectos = proyectosServices.findByIDEmpresa(Idempresa);
+    	Optional<Proyecto> oProyectos = proyectosServices.findByIDEmpresa(Idempresa);
 		//Validamos que haya encontrado el proyecto
 		if(!oProyectos.isPresent()) {
 			//Devolvemos que no ha encontrado la empresa
 			return ResponseEntity.notFound().build();
 			}
-		Optional<Empresas> oEmpresas = empresasServices.findByID(Idempresa);
+		Optional<Empresa> oEmpresas = empresasServices.findByID(Idempresa);
 		//Validamos que haya encontrado la empresa
 		if(!oEmpresas.isPresent()) {
 
@@ -188,7 +188,7 @@ public class ProyectosController2 {
     @GetMapping("/empresas/{ide}/reportes")
     @Produces({"text/plain", "application/json"})
     public ResponseEntity<Resource> read_reporte(@PathVariable(value = "ide") Long Idempresa){
-    	Optional<Proyectos> oProyectos = proyectosServices.findByIDEmpresa(Idempresa);
+    	Optional<Proyecto> oProyectos = proyectosServices.findByIDEmpresa(Idempresa);
     	
     	
 		//Validamos que haya encontrado el proyecto
@@ -198,7 +198,7 @@ public class ProyectosController2 {
 			return null;
 			}
 		
-		Optional<Empresas> oEmpresas = empresasServices.findByID(Idempresa);
+		Optional<Empresa> oEmpresas = empresasServices.findByID(Idempresa);
 		//Validamos que haya encontrado la empresa
 		if(!oEmpresas.isPresent()) {
 			//Devolvemos que no ha encontrado la empresa
@@ -256,12 +256,12 @@ public class ProyectosController2 {
                 .body(resource);
 		
 		}
-	  public Reporte generar_calculo(Empresas emp) {
+	  public Reporte generar_calculo(Empresa emp) {
 		  Reporte reporte = new Reporte();
 			reporte.setId(emp.getId());
 			reporte.setNombre("liquidez" + emp.getNombre());
 			List<String> calculo = new ArrayList<>();
-			for( Riesgos r : emp.getL_riesgos() )
+			for( Riesgo r : emp.getL_riesgos() )
 			{
 				if (r.getId()%2==0)
 				    //pasará

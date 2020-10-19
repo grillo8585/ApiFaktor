@@ -9,27 +9,27 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 
-import com.asofi.servrest.entity.Empresas;
-import com.asofi.servrest.entity.Proyectos;
+import com.asofi.servrest.entity.Empresa;
+import com.asofi.servrest.entity.Proyecto;
 
 @Path("/servicioproyectos")
 public interface ServicioProyectos {
 	@Path("/proyectos")
 	@GET
-	List<Proyectos> obtenerProyectos();
+	List<Proyecto> obtenerProyectos();
 	
 	@Path("/proyectos/{id}")
 	@GET
-	Proyectos obtenerProyecto(@PathParam("id") Long id);
+	Proyecto obtenerProyecto(@PathParam("id") Long id);
 	
 	@Path("/proyectos/{id}/empresas/{ide}")
 	@GET
-	Empresas obtenerProyectoEmpresa(@PathParam("id") Long id,@PathParam("ide") Long ide);
+	Empresa obtenerProyectoEmpresa(@PathParam("id") Long id,@PathParam("ide") Long ide);
 	@Path("/proyectos/")
 	@POST
-	Response crearProyecto(Proyectos proyecto);
+	Response crearProyecto(Proyecto proyecto);
 	
 	@Path("/proyectos/")
 	@PUT
-	Response actualizarProyecto(Proyectos proyecto);
+	Response actualizarProyecto(Proyecto proyecto);
 }

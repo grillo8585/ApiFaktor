@@ -9,23 +9,23 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 
-import com.asofi.servrest.entity.Riesgos;
+import com.asofi.servrest.entity.Riesgo;
 
 @Path("/servicioriesgos")
 public interface ServicioRiesgos {
 	@Path("/riesgos")
 	@GET
-	List<Riesgos> obtenerRiesgos();
+	List<Riesgo> obtenerRiesgos();
 	
-	@Path("/Riesgos/{id}")
+	@Path("/Riesgo/{id}")
 	@GET
-	Riesgos obtenerRiesgo(@PathParam("id") Long id);
+	Riesgo obtenerRiesgo(@PathParam("id") Long id);
 	
 	@Path("/proyectos/")
 	@POST
-	Response crearRiesgo(Riesgos riesgo);
+	Response crearRiesgo(Riesgo riesgo);
 	
 	@Path("/proyectos/")
 	@PUT
-	Response actualizarRiesgo(Riesgos riesgo);
+	Response actualizarRiesgo(Riesgo riesgo);
 }

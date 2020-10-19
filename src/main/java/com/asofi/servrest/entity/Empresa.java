@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name="empresas")
 @XmlRootElement(name="empresas")
-public class Empresas implements Serializable {
+public class Empresa implements Serializable {
 	/**
 	 * 
 	 */
@@ -47,14 +47,14 @@ public class Empresas implements Serializable {
 		        inverseJoinColumns = @JoinColumn(name="l_riesgos_id", nullable = false)
 		    )
 	@ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REFRESH })
-	private List<Riesgos> l_riesgos;
+	private List<Riesgo> l_riesgos;
 //
 //	
-	public List<Riesgos> getL_riesgos() {
+	public List<Riesgo> getL_riesgos() {
 		return l_riesgos;
 	}
 
-	public void setL_riesgos(List<Riesgos> l_riesgos) {
+	public void setL_riesgos(List<Riesgo> l_riesgos) {
 		this.l_riesgos = l_riesgos;
 	}
 

@@ -10,12 +10,12 @@ import javax.ws.rs.core.Response;
 
 import org.springframework.stereotype.Service;
 
-import com.asofi.servrest.entity.Empresas;
-import com.asofi.servrest.entity.Proyectos;
+import com.asofi.servrest.entity.Empresa;
+import com.asofi.servrest.entity.Proyecto;
 
 @Service
 public class ServicioProyectosImp implements ServicioProyectos {
-	Map<Long, Proyectos > proyectos = new HashMap<>();
+	Map<Long, Proyecto > proyectos = new HashMap<>();
 	long idActual = 123;
 
 	public ServicioProyectosImp() {
@@ -24,7 +24,7 @@ public class ServicioProyectosImp implements ServicioProyectos {
 
 	private void init() {
 		// TODO Auto-generated method stub
-		Proyectos proyecto = new Proyectos();
+		Proyecto proyecto = new Proyecto();
 		proyecto.setId(idActual);
 		proyecto.setNombre("Pacho");
 		proyectos.put(proyecto.getId(), proyecto);
@@ -32,21 +32,21 @@ public class ServicioProyectosImp implements ServicioProyectos {
 	}
 
 	@Override
-	public List<Proyectos> obtenerProyectos() {
+	public List<Proyecto> obtenerProyectos() {
 		// TODO Auto-generated method stub
-		Collection<Proyectos> resultado = proyectos.values();
-		List<Proyectos> respuesta = new ArrayList<>(resultado);
+		Collection<Proyecto> resultado = proyectos.values();
+		List<Proyecto> respuesta = new ArrayList<>(resultado);
 		return respuesta;
 	}
 
 	@Override
-	public Proyectos obtenerProyecto(Long id) {
+	public Proyecto obtenerProyecto(Long id) {
 		// TODO Auto-generated method stub
 		return proyectos.get(id);
 	}
 
 	@Override
-	public Response crearProyecto(Proyectos Proyecto) {
+	public Response crearProyecto(Proyecto Proyecto) {
 		// TODO Auto-generated method stub
 		Proyecto.setId(++idActual);
 		;
@@ -56,9 +56,9 @@ public class ServicioProyectosImp implements ServicioProyectos {
 	}
 
 	@Override
-	public Response actualizarProyecto(Proyectos proyecto) {
+	public Response actualizarProyecto(Proyecto proyecto) {
 		// TODO Auto-generated method stub
-		Proyectos proyectoActual = proyectos.get(proyecto.getId());
+		Proyecto proyectoActual = proyectos.get(proyecto.getId());
 		Response respuesta;
 		if (proyectoActual != null) {
 			proyectos.put(proyectoActual.getId(), proyecto);
@@ -71,7 +71,7 @@ public class ServicioProyectosImp implements ServicioProyectos {
 	}
 
 	@Override
-	public Empresas obtenerProyectoEmpresa(Long id, Long ide) {
+	public Empresa obtenerProyectoEmpresa(Long id, Long ide) {
 		// TODO Auto-generated method stub
 		return null;
 	}

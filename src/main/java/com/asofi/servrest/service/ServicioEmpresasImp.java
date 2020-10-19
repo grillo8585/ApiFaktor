@@ -10,11 +10,11 @@ import javax.ws.rs.core.Response;
 
 import org.springframework.stereotype.Service;
 
-import com.asofi.servrest.entity.Empresas;
+import com.asofi.servrest.entity.Empresa;
 
 @Service
 public class ServicioEmpresasImp implements ServicioEmpresas {
-	Map<Long, Empresas > empresas = new HashMap<>();
+	Map<Long, Empresa > empresas = new HashMap<>();
 	long idActual = 123;
 
 	public ServicioEmpresasImp() {
@@ -23,7 +23,7 @@ public class ServicioEmpresasImp implements ServicioEmpresas {
 
 	private void init() {
 		// TODO Auto-generated method stub
-		Empresas empresa = new Empresas();
+		Empresa empresa = new Empresa();
 		empresa.setId(idActual);
 		empresa.setNombre("Pacho");
 		empresas.put(empresa.getId(), empresa);
@@ -31,21 +31,21 @@ public class ServicioEmpresasImp implements ServicioEmpresas {
 	}
 
 	@Override
-	public List<Empresas> obtenerEmpresas() {
+	public List<Empresa> obtenerEmpresas() {
 		// TODO Auto-generated method stub
-		Collection<Empresas> resultado = empresas.values();
-		List<Empresas> respuesta = new ArrayList<>(resultado);
+		Collection<Empresa> resultado = empresas.values();
+		List<Empresa> respuesta = new ArrayList<>(resultado);
 		return respuesta;
 	}
 
 	@Override
-	public Empresas obtenerEmpresa(Long id) {
+	public Empresa obtenerEmpresa(Long id) {
 		// TODO Auto-generated method stub
 		return empresas.get(id);
 	}
 
 	@Override
-	public Response crearEmpresa(Empresas Empresa) {
+	public Response crearEmpresa(Empresa Empresa) {
 		// TODO Auto-generated method stub
 		Empresa.setId(++idActual);
 		;
@@ -55,9 +55,9 @@ public class ServicioEmpresasImp implements ServicioEmpresas {
 	}
 
 	@Override
-	public Response actualizarEmpresa(Empresas empresa) {
+	public Response actualizarEmpresa(Empresa empresa) {
 		// TODO Auto-generated method stub
-		Empresas empresaActual = empresas.get(empresa.getId());
+		Empresa empresaActual = empresas.get(empresa.getId());
 		Response respuesta;
 		if (empresaActual != null) {
 			empresas.put(empresaActual.getId(), empresa);
