@@ -86,7 +86,7 @@ public class RiesgosController2 {
 		oRiesgos.get().setDescripcionRiesgo(riesgoDetails.getDescripcionRiesgo());
 		oRiesgos.get().setRiesgosAsociados(riesgoDetails.getRiesgosAsociados());
 		oRiesgos.get().setCausasRiesgo(riesgoDetails.getCausasRiesgo());
-		oRiesgos.get().setFactorRiesgo(riesgoDetails.getFactorRiesgo());
+		//oRiesgos.get().setFactorRiesgo(riesgoDetails.getFactorRiesgo());
 		
 		return ResponseEntity.status(HttpStatus.CREATED).body(riesgosServices.save(oRiesgos.get()));
 		

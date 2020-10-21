@@ -109,11 +109,11 @@ public class Riesgo implements Serializable{
 		this.causasRiesgo = causasRiesgo;
 	}
 	
-	public String getFactorRiesgo() {
-		return factorRiesgo;
-	}
-
-	public void setFactorRiesgo(String factorRiesgo) {
-		this.factorRiesgo = factorRiesgo;
-	}
+//	public String getFactorRiesgo() {
+//		return factorRiesgo;
+//	}
+//
+//	public void setFactorRiesgo(String factorRiesgo) {
+//		this.factorRiesgo = factorRiesgo;
+//	}
 }

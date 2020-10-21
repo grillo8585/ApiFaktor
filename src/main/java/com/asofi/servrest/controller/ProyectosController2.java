@@ -130,7 +130,8 @@ public class ProyectosController2 {
 		
 		//Actualizamos los campos
 		oproyectos.get().setNombre(proyectoDetails.getNombre());
-		oproyectos.get().setEmpresa(proyectoDetails.getEmpresa());
+		Optional<Empresa> oEmpresas  = empresasServices.findByID(proyectoDetails.getEmpresa().getId());
+		oproyectos.get().setEmpresa(oEmpresas.get());
 		oproyectos.get().setDescripcion(proyectoDetails.getDescripcion());
 		return ResponseEntity.status(HttpStatus.CREATED).body(proyectosServices.save(oproyectos.get()));
 		
